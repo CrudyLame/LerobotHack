@@ -1,0 +1,26 @@
+# MuJoCo simulation
+mujoco==3.2.6
+
+# Core dependencies (installed manually to avoid lerobot overwriting packages)
+torch>=2.2.1
+numpy
+scipy
+matplotlib
+pyautogui
+Pillow
+pyserial
+
+# LeRobot dependencies (pinned to avoid conflicts)
+safetensors==0.5.3
+datasets>=3.4.1
+transformers>=4.50.3
+draccus==0.10.0
+einops
+opencv-python-headless
+huggingface_hub
+pyarrow
+jsonlines
+gymnasium>=1.1.1
+
+# Jupyter
+jupyter

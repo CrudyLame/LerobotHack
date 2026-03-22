@@ -1,0 +1,9 @@
+demo_data
+demo_data_language
+ckpt
+.venv
+wandb
+__pycache__
+*.pyc
+.DS_Store
+_example_repo
