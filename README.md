@@ -45,7 +45,8 @@ pip install -r requirements.txt
 │   ├── ik.py                        # Обратная кинематика
 │   ├── transforms.py                # Преобразования координат
 │   └── utils.py                     # Утилиты
-└── assets/                          # 3D-модели SO-101 и объектов
+├── asset.zip                        # 3D-модели (распаковывается install.sh)
+└── asset/                           # 3D-модели SO-101 и объектов (после распаковки)
     └── so101/                       # URDF/XML модели манипулятора SO-101
 ```
 
