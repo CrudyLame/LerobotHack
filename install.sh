@@ -3,6 +3,15 @@ set -e
 
 echo "=== LeRobot Workshop Setup ==="
 
+# Unzip assets if not already present
+if [ ! -d "asset" ]; then
+    echo "Unzipping assets..."
+    unzip -q asset.zip
+    echo "Assets extracted"
+else
+    echo "Assets already present, skipping unzip"
+fi
+
 # Create virtual environment
 python3 -m venv .venv
 source .venv/bin/activate

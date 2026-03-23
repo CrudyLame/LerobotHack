@@ -8,3 +8,4 @@ __pycache__
 .DS_Store
 _example_repo
 .demo_data
+asset/
