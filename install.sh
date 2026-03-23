@@ -3,6 +3,24 @@ set -e
 
 echo "=== LeRobot Workshop Setup ==="
 
+# Install Python 3.10 and tkinter if needed
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if ! command -v python3.10 &> /dev/null; then
+        echo "Installing Python 3.10..."
+        sudo apt update
+        sudo apt install -y python3.10 python3.10-venv python3.10-tk
+    else
+        echo "Installing python3.10-tk..."
+        sudo apt install -y python3.10-tk
+    fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    if ! command -v python3.10 &> /dev/null; then
+        echo "Installing Python 3.10..."
+        brew install python@3.10
+    fi
+    brew install python-tk@3.10
+fi
+
 # Unzip assets if not already present
 if [ ! -d "asset" ]; then
     echo "Unzipping assets..."
@@ -13,14 +31,7 @@ else
 fi
 
 # Create virtual environment with Python 3.10
-PYTHON=python3.10
-if ! command -v $PYTHON &> /dev/null; then
-    echo "Error: $PYTHON not found. Please install Python 3.10 first."
-    echo "  macOS: brew install python@3.10"
-    echo "  Ubuntu: sudo apt install python3.10 python3.10-venv"
-    exit 1
-fi
-$PYTHON -m venv .venv
+python3.10 -m venv .venv
 source .venv/bin/activate
 echo "Virtual environment created with $($PYTHON --version)"
 
