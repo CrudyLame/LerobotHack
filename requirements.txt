@@ -1,29 +1,12 @@
-# MuJoCo simulation
-mujoco==3.2.6
+--extra-index-url https://download.pytorch.org/whl/cu124
 
-# Core dependencies (installed manually to avoid lerobot overwriting packages)
-torch>=2.2.1
-torchvision>=0.21.0
-torchaudio>=2.6.0
-numpy
-scipy
-matplotlib
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
 pyautogui
-Pillow
-pyserial
-
-# LeRobot dependencies (pinned to avoid conflicts)
+matplotlib
+scipy
 safetensors==0.5.3
-datasets>=3.4.1
-transformers>=4.50.3
-draccus==0.10.0
-einops
-opencv-python-headless
-huggingface_hub
-pyarrow
-jsonlines
-gymnasium>=1.1.1
-av>=14.2.0
-
-# Jupyter
-jupyter
+datasets==3.4.1
+transformers==4.50.3
+lerobot @ git+https://github.com/huggingface/lerobot.git@10b7b3532543b4adfb65760f02a49b4c537afde7

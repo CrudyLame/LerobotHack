@@ -24,14 +24,10 @@ $PYTHON -m venv .venv
 source .venv/bin/activate
 echo "Virtual environment created with $($PYTHON --version)"
 
-# Install dependencies manually (NOT via pip install lerobot)
+# Install all dependencies (including lerobot)
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install --no-cache-dir -r requirements.txt
 echo "Dependencies installed"
-
-# Install lerobot without its deps to avoid overwriting packages
-pip install --no-deps "lerobot @ git+https://github.com/huggingface/lerobot.git@10b7b3532543b4adfb65760f02a49b4c537afde7"
-echo "LeRobot installed (--no-deps)"
 
 echo ""
 echo "=== Done! ==="
