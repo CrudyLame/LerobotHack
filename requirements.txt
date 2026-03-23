@@ -25,25 +25,5 @@ jsonlines
 gymnasium>=1.1.1
 av>=14.2.0
 
-# LeRobot CLI dependencies (needed for calibrate, teleoperate, record, find-port)
-cmake>=3.29.0.1
-deepdiff>=7.0.1
-diffusers>=0.27.2
-flask>=3.0.3
-gdown>=5.1.0
-h5py>=3.10.0
-imageio[ffmpeg]>=2.34.0
-numba>=0.59.0
-omegaconf>=2.3.0
-packaging>=24.2
-pymunk>=6.6.0,<7.0.0
-pynput>=1.7.7
-pyzmq>=26.2.1
-rerun-sdk>=0.21.0
-termcolor>=2.4.0
-wandb>=0.16.3
-zarr>=2.17.0
-feetech-servo-sdk>=1.0.0
-
 # Jupyter
 jupyter
