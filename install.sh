@@ -14,12 +14,8 @@ pip install -r requirements.txt
 echo "Dependencies installed"
 
 # Install lerobot without its deps to avoid overwriting packages
-pip install --no-deps "lerobot @ git+https://github.com/huggingface/lerobot.git"
+pip install --no-deps "lerobot @ git+https://github.com/huggingface/lerobot.git@10b7b3532543b4adfb65760f02a49b4c537afde7"
 echo "LeRobot installed (--no-deps)"
-
-# Extract simulation assets
-cd asset/objaverse && unzip -o plate_11.zip -d plate_11 && cd ../..
-echo "Assets extracted"
 
 echo ""
 echo "=== Done! ==="
