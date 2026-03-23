@@ -3,6 +3,7 @@ mujoco==3.2.6
 
 # Core dependencies (installed manually to avoid lerobot overwriting packages)
 torch>=2.2.1
+torchvision>=0.21.0
 numpy
 scipy
 matplotlib

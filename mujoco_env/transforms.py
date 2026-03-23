@@ -122,7 +122,7 @@ def pr2t(p,R):
     return T
 
 def r2w(R):
-    """
+    r"""
         R to \omega
     """
     el = np.array([
