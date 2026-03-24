@@ -32,7 +32,7 @@ else
 fi
 
 # Create virtual environment with Python 3.12
-python3.10 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 echo "Virtual environment created with $(python --version)"
 
