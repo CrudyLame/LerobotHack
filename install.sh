@@ -33,7 +33,7 @@ echo "Virtual environment created with $(python --version)"
 
 # Install all dependencies (including lerobot)
 pip install --upgrade pip
-pip install --no-cache-dir -r requirements.txt
+pip install -r requirements.txt
 echo "Dependencies installed"
 
 echo ""
