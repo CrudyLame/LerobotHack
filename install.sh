@@ -3,22 +3,22 @@ set -e
 
 echo "=== LeRobot Workshop Setup ==="
 
-# Install Python 3.10 and tkinter if needed
+# Install Python 3.12 and tkinter if needed
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    if ! command -v python3.10 &> /dev/null; then
-        echo "Installing Python 3.10..."
+    if ! command -v python3.12 &> /dev/null; then
+        echo "Installing Python 3.12..."
         sudo apt update
-        sudo apt install -y python3.10 python3.10-venv python3.10-tk unzip
+        sudo apt install -y python3.12 python3.12-venv python3.12-tk unzip
     else
-        echo "Installing python3.10-tk and unzip..."
-        sudo apt install -y python3.10-tk unzip
+        echo "Installing python3.12-tk and unzip..."
+        sudo apt install -y python3.12-tk unzip
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    if ! command -v python3.10 &> /dev/null; then
-        echo "Installing Python 3.10..."
-        brew install python@3.10
+    if ! command -v python3.12 &> /dev/null; then
+        echo "Installing Python 3.12..."
+        brew install python@3.12
     fi
-    brew install python-tk@3.10
+    brew install python-tk@3.12
     brew install unzip
 fi
 
@@ -31,7 +31,7 @@ else
     echo "Assets already present, skipping unzip"
 fi
 
-# Create virtual environment with Python 3.10
+# Create virtual environment with Python 3.12
 python3.10 -m venv .venv
 source .venv/bin/activate
 echo "Virtual environment created with $(python --version)"
