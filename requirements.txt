@@ -10,6 +10,6 @@ torch==2.6.0
 torchvision==0.21.0
 torchaudio==2.6.0
 transformers==4.50.3
-lerobot @ git+https://github.com/huggingface/lerobot.git@10b7b3532543b4adfb65760f02a49b4c537afde7
+lerobot[feetech] @ git+https://github.com/huggingface/lerobot.git@10b7b3532543b4adfb65760f02a49b4c537afde7
 jupyter
 glfw

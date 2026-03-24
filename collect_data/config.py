@@ -1,0 +1,30 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+
+
+@dataclass(slots=True)
+class CollectDataConfig:
+    seed: int | None = 0
+    repo_name: str = "so101_pnp"
+    num_demo: int = 3
+    root: Path = Path("./demo_data")
+    use_master_arm: bool = True
+    leader_port: str = "/dev/tty.usbmodem5AB90686581"
+    leader_id: str = "None"
+    motion_threshold: float = 0.03
+    task_name: str = "Поставить кружку на тарелку"
+    xml_path: str = "./asset/example_scene_y.xml"
+    fps: int = 20
+    image_size: tuple[int, int] = (256, 256)
+    image_writer_threads: int = 10
+    image_writer_processes: int = 5
+
+    @property
+    def action_type(self) -> str:
+        return "joint_angle" if self.use_master_arm else "delta_joint_angle"
+
+
+def default_config() -> CollectDataConfig:
+    return CollectDataConfig()

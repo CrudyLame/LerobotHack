@@ -6,7 +6,7 @@ import glfw
 from mujoco_env.mujoco_parser import MuJoCoParserClass
 from mujoco_env.utils import sample_xyzs, rotation_matrix, add_title_to_img
 from mujoco_env.ik import solve_ik
-from mujoco_env.transforms import rpy2r, r2rpy
+from mujoco_env.transforms import quat2r, r2quat, rpy2r, r2rpy
 
 
 class SimpleEnv:
@@ -423,35 +423,54 @@ class SimpleEnv:
         """
         p_mug = self.env.get_p_body("body_obj_mug_5")
         p_plate = self.env.get_p_body("body_obj_plate_11")
+        p_mug_bottom = self.env.get_p_site("bottom_site_mug_5")
+        p_mug_top = self.env.get_p_site("top_site_mug_5")
+        p_plate_top = self.env.get_p_site("top_site_plate_11")
+        p_gripper = self.env.get_p_body(self.ee_body_name)
         gr = self._get_gripper_q()
 
-        if (
-            np.linalg.norm(p_mug[:2] - p_plate[:2]) < 0.1
-            and np.linalg.norm(p_mug[2] - p_plate[2]) < 0.6
-            and gr < 0.1
-        ):
-            p = self.env.get_p_body(self.ee_body_name)[2]
-            if p > 0.9:
-                return True
-        return False
+        mug_is_above_plate_xy = np.linalg.norm(p_mug[:2] - p_plate[:2]) < 0.08
+        mug_is_on_plate_height = abs(p_mug_bottom[2] - p_plate_top[2]) < 0.03
+        gripper_is_open = gr < 0.05
+        hand_is_raised = p_gripper[2] > (p_mug_top[2] + 0.08)
+
+        return (
+            mug_is_above_plate_xy
+            and mug_is_on_plate_height
+            and gripper_is_open
+            and hand_is_raised
+        )
 
     def get_obj_pose(self):
         """
         Returns:
-            p_mug, p_plate
+            mug_pose, plate_pose where each pose is [x, y, z, qw, qx, qy, qz]
         """
-        p_mug = self.env.get_p_body("body_obj_mug_5")
-        p_plate = self.env.get_p_body("body_obj_plate_11")
-        return p_mug, p_plate
+        p_mug, R_mug = self.env.get_pR_body("body_obj_mug_5")
+        p_plate, R_plate = self.env.get_pR_body("body_obj_plate_11")
+        mug_pose = np.concatenate([p_mug, r2quat(R_mug)], dtype=np.float32)
+        plate_pose = np.concatenate([p_plate, r2quat(R_plate)], dtype=np.float32)
+        return mug_pose, plate_pose
 
-    def set_obj_pose(self, p_mug, p_plate):
+    def set_obj_pose(self, mug_pose, plate_pose):
         """
         Set object poses.
         """
-        self.env.set_p_base_body(body_name="body_obj_mug_5", p=p_mug)
-        self.env.set_R_base_body(body_name="body_obj_mug_5", R=np.eye(3, 3))
-        self.env.set_p_base_body(body_name="body_obj_plate_11", p=p_plate)
-        self.env.set_R_base_body(body_name="body_obj_plate_11", R=np.eye(3, 3))
+        mug_pose = np.asarray(mug_pose, dtype=np.float32)
+        plate_pose = np.asarray(plate_pose, dtype=np.float32)
+
+        self.env.set_p_base_body(body_name="body_obj_mug_5", p=mug_pose[:3])
+        if mug_pose.shape[0] >= 7:
+            self.env.set_R_base_body(body_name="body_obj_mug_5", R=quat2r(mug_pose[3:7]))
+        else:
+            self.env.set_R_base_body(body_name="body_obj_mug_5", R=np.eye(3, 3))
+
+        self.env.set_p_base_body(body_name="body_obj_plate_11", p=plate_pose[:3])
+        if plate_pose.shape[0] >= 7:
+            self.env.set_R_base_body(body_name="body_obj_plate_11", R=quat2r(plate_pose[3:7]))
+        else:
+            self.env.set_R_base_body(body_name="body_obj_plate_11", R=np.eye(3, 3))
+
         self.step_env()
 
     def get_ee_pose(self):

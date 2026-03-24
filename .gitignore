@@ -1,11 +1,35 @@
-demo_data
-demo_data_language
-ckpt
-.venv
-wandb
-__pycache__
-*.pyc
-.DS_Store
-_example_repo
-.demo_data
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+
+# Packaging / build artifacts
+build/
+dist/
+*.egg-info/
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local datasets / experiment outputs
+demo_data/
+demo_data_language/
+.demo_data/
+ckpt/
+wandb/
+_example_repo/
+
+# Generated assets
 asset/
+
+# OS files
+.DS_Store

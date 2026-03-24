@@ -8,10 +8,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if ! command -v python3.10 &> /dev/null; then
         echo "Installing Python 3.10..."
         sudo apt update
-        sudo apt install -y python3.10 python3.10-venv python3.10-tk
+        sudo apt install -y python3.10 python3.10-venv python3.10-tk unzip
     else
-        echo "Installing python3.10-tk..."
-        sudo apt install -y python3.10-tk
+        echo "Installing python3.10-tk and unzip..."
+        sudo apt install -y python3.10-tk unzip
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     if ! command -v python3.10 &> /dev/null; then
@@ -19,6 +19,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         brew install python@3.10
     fi
     brew install python-tk@3.10
+    brew install unzip
 fi
 
 # Unzip assets if not already present
@@ -33,7 +34,7 @@ fi
 # Create virtual environment with Python 3.10
 python3.10 -m venv .venv
 source .venv/bin/activate
-echo "Virtual environment created with $($PYTHON --version)"
+echo "Virtual environment created with $(python --version)"
 
 # Install all dependencies (including lerobot)
 pip install --upgrade pip
