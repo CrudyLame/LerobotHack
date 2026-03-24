@@ -44,6 +44,13 @@ def create_dataloader(dataset: LeRobotDataset, episode_index: int):
     return dataloader, episode_sampler
 
 
+def create_all_episode_dataloaders(dataset: LeRobotDataset):
+    episode_loaders = []
+    for episode_index in range(dataset.num_episodes):
+        episode_loaders.append((episode_index, *create_dataloader(dataset, episode_index)))
+    return episode_loaders
+
+
 def save_stats_json(dataset: LeRobotDataset) -> None:
     stats = serialize_dict(dataset.meta.stats)
     path_stats = dataset.root / "meta" / "stats.json"
