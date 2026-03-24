@@ -5,14 +5,9 @@ echo "=== LeRobot Workshop Setup ==="
 
 # Install Python 3.12 and tkinter if needed
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    if ! command -v python3.12 &> /dev/null; then
-        echo "Installing Python 3.12..."
-        sudo apt update
-        sudo apt install -y python3.12 python3.12-venv python3.12-tk unzip
-    else
-        echo "Installing python3.12-tk and unzip..."
-        sudo apt install -y python3.12-tk unzip
-    fi
+    echo "Installing Python dependencies..."
+    sudo apt update
+    sudo apt install -y python3 python3-venv python3-tk unzip
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     if ! command -v python3.12 &> /dev/null; then
         echo "Installing Python 3.12..."
