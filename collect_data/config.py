@@ -11,7 +11,7 @@ class CollectDataConfig:
     num_demo: int = 3
     root: Path = Path("./demo_data")
     use_master_arm: bool = True
-    leader_port: str = "/dev/tty.usbmodem5AB90686581"
+    leader_port: str = "/dev/ttyACM0"
     leader_id: str = "None"
     motion_threshold: float = 0.03
     task_name: str = "Поставить кружку на тарелку"
