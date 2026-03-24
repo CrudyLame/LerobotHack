@@ -7,7 +7,7 @@ echo "=== LeRobot Workshop Setup ==="
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "Installing Python dependencies..."
     sudo apt update
-    sudo apt install -y python3 python3-venv python3-tk unzip
+    sudo apt install -y python3 python3-venv python3-tk unzip build-essential
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     if ! command -v python3.12 &> /dev/null; then
         echo "Installing Python 3.12..."
